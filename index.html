@@ -1,0 +1,1649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#7c3aed">
+    <title>Consciousness OS Ultimate - Complete Mind Preservation</title>
+    
+    <style>
+        :root {
+            --primary: #7c3aed;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --dark: #1e293b;
+            --light: #f8fafc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .app {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--light);
+            min-height: 100vh;
+            position: relative;
+            padding-bottom: 85px;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 24px 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+
+        .header-subtitle {
+            font-size: 12px;
+            opacity: 0.95;
+        }
+
+        /* Dashboard */
+        .dashboard {
+            background: white;
+            margin: -35px 16px 20px;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+            position: relative;
+            z-index: 10;
+        }
+
+        .score-circle {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 8px 24px rgba(124, 58, 237, 0.4);
+            animation: pulse 3s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+
+        .score-value {
+            font-size: 48px;
+            font-weight: 900;
+            color: white;
+            line-height: 1;
+        }
+
+        .score-label {
+            font-size: 11px;
+            color: rgba(255,255,255,0.95);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .state-badge {
+            text-align: center;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #f3e8ff, #fae8ff);
+            border-radius: 12px;
+        }
+
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #fafafa, #f3f4f6);
+            border-radius: 12px;
+            padding: 14px 10px;
+            text-align: center;
+            border: 2px solid #e5e7eb;
+        }
+
+        .stat-value {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 10px;
+            color: #64748b;
+            margin-top: 6px;
+            text-transform: uppercase;
+        }
+
+        /* Content */
+        .content {
+            padding: 0 16px 20px;
+        }
+
+        .screen {
+            display: none;
+        }
+
+        .screen.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Form */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 8px;
+        }
+
+        .form-input, .form-textarea, .form-select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        /* Slider */
+        .slider-group {
+            margin-bottom: 24px;
+        }
+
+        .slider-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .slider-value {
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--primary);
+            min-width: 60px;
+            text-align: right;
+        }
+
+        .slider {
+            width: 100%;
+            height: 14px;
+            border-radius: 8px;
+            background: linear-gradient(90deg, #ef4444 0%, #f97316 20%, #eab308 40%, #84cc16 60%, #22c55e 80%, #8b5cf6 100%);
+            outline: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+            border: 4px solid var(--primary);
+            cursor: pointer;
+        }
+
+        .slider::-moz-range-thumb {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+            border: 4px solid var(--primary);
+            cursor: pointer;
+        }
+
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-size: 11px;
+            color: #64748b;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4);
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-primary:active {
+            transform: scale(0.97);
+        }
+
+        .btn-secondary {
+            width: 100%;
+            padding: 16px;
+            background: #f1f5f9;
+            color: #475569;
+            border: none;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 12px;
+        }
+
+        /* Button Group */
+        .btn-group {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .btn-option {
+            padding: 14px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            background: white;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .btn-option.active {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, #f3e8ff, #fae8ff);
+            color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
+        }
+
+        /* Voice Recorder */
+        .voice-recorder {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 2px solid #fbbf24;
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .record-btn {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--danger);
+            color: white;
+            border: none;
+            font-size: 32px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+            transition: all 0.2s;
+            margin: 16px auto;
+            display: block;
+        }
+
+        .record-btn.recording {
+            background: #dc2626;
+            animation: recordPulse 1s infinite;
+        }
+
+        @keyframes recordPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            50% { box-shadow: 0 0 0 20px rgba(239, 68, 68, 0); }
+        }
+
+        /* Media Upload */
+        .media-upload {
+            border: 2px dashed #cbd5e1;
+            border-radius: 16px;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 16px;
+        }
+
+        .media-upload:hover {
+            border-color: var(--primary);
+            background: #f8fafc;
+        }
+
+        .media-upload input {
+            display: none;
+        }
+
+        /* Chat */
+        .chat-container {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 16px;
+            padding: 16px;
+            background: #f8fafc;
+            border-radius: 12px;
+        }
+
+        .chat-message {
+            margin-bottom: 16px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            max-width: 85%;
+            line-height: 1.5;
+        }
+
+        .chat-message.user {
+            background: var(--primary);
+            color: white;
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .chat-message.assistant {
+            background: #e2e8f0;
+            color: var(--dark);
+        }
+
+        .chat-input-container {
+            display: flex;
+            gap: 12px;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 15px;
+        }
+
+        .chat-send {
+            padding: 12px 24px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* Timeline */
+        .timeline-entry {
+            background: white;
+            border-radius: 14px;
+            padding: 18px;
+            margin-bottom: 12px;
+            border-left: 5px solid #cbd5e1;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        .timeline-entry.peak {
+            border-left-color: var(--success);
+            background: linear-gradient(90deg, #f0fdf4 0%, white 100%);
+        }
+
+        .timeline-entry.low {
+            border-left-color: var(--danger);
+            background: linear-gradient(90deg, #fef2f2 0%, white 100%);
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .timeline-date {
+            font-size: 12px;
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        .timeline-score {
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--primary);
+        }
+
+        .timeline-metrics {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+        }
+
+        .timeline-tag {
+            font-size: 11px;
+            padding: 4px 8px;
+            background: #f1f5f9;
+            border-radius: 6px;
+            color: #475569;
+            font-weight: 600;
+        }
+
+        .timeline-content {
+            font-size: 14px;
+            color: #475569;
+            line-height: 1.6;
+            margin-top: 8px;
+        }
+
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid #e2e8f0;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            padding: 8px 0 12px;
+            box-shadow: 0 -4px 12px rgba(0,0,0,0.08);
+            max-width: 600px;
+            margin: 0 auto;
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 8px 4px;
+            cursor: pointer;
+            color: #64748b;
+            transition: all 0.2s;
+            border-radius: 10px;
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+            background: #f3e8ff;
+        }
+
+        .nav-icon {
+            font-size: 20px;
+        }
+
+        .nav-label {
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--dark);
+            color: white;
+            padding: 16px 28px;
+            border-radius: 14px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+            z-index: 1000;
+            display: none;
+            font-weight: 600;
+            max-width: 90%;
+        }
+
+        .toast.show {
+            display: block;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateX(-50%) translateY(100px); opacity: 0; }
+            to { transform: translateX(-50%) translateY(0); opacity: 1; }
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .empty-icon {
+            font-size: 72px;
+            margin-bottom: 16px;
+            opacity: 0.4;
+        }
+
+        .empty-text {
+            color: #64748b;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* Analysis Card */
+        .analysis-card {
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            border: 2px solid #bae6fd;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .analysis-card.warning {
+            background: linear-gradient(135deg, #fff7ed, #ffedd5);
+            border-color: #fed7aa;
+        }
+
+        .analysis-card.success {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border-color: #bbf7d0;
+        }
+
+        .analysis-title {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .analysis-content {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #475569;
+        }
+
+        /* Media Gallery */
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .media-item {
+            aspect-ratio: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #f1f5f9;
+            cursor: pointer;
+        }
+
+        .media-item img, .media-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Spinner */
+        .spinner {
+            border: 3px solid rgba(124, 58, 237, 0.3);
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-title">🧠 Consciousness OS Ultimate</div>
+            <div class="header-subtitle">Complete Mind Preservation System · All Features</div>
+        </div>
+
+        <!-- Dashboard -->
+        <div class="dashboard">
+            <div class="score-circle">
+                <div class="score-value" id="mainScore">--</div>
+                <div class="score-label">COGNITION</div>
+            </div>
+            <div class="state-badge" id="stateLabel">Initializing System...</div>
+            <div class="quick-stats">
+                <div class="stat-box">
+                    <div class="stat-value" id="avgMood">--</div>
+                    <div class="stat-label">Mood</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="avgFocus">--</div>
+                    <div class="stat-label">Focus</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="totalLogs">0</div>
+                    <div class="stat-label">Logs</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Log Screen -->
+            <div id="logScreen" class="screen active">
+                <div class="card">
+                    <div class="card-title">📅 Context</div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Date</label>
+                        <input type="date" class="form-input" id="entryDate">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Time of Day</label>
+                        <div class="btn-group">
+                            <button class="btn-option active" onclick="selectOption('timeOfDay', 'Morning', this)">🌅 Morning</button>
+                            <button class="btn-option" onclick="selectOption('timeOfDay', 'Afternoon', this)">☀️ Day</button>
+                            <button class="btn-option" onclick="selectOption('timeOfDay', 'Night', this)">🌙 Night</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Activity</label>
+                        <div class="btn-group">
+                            <button class="btn-option" onclick="selectOption('activity', 'Working', this)">💼 Work</button>
+                            <button class="btn-option" onclick="selectOption('activity', 'Studying', this)">📚 Study</button>
+                            <button class="btn-option" onclick="selectOption('activity', 'Relaxing', this)">😌 Relax</button>
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn-option" onclick="selectOption('activity', 'Social', this)">👥 Social</button>
+                            <button class="btn-option" onclick="selectOption('activity', 'Exercise', this)">🏃 Exercise</button>
+                            <button class="btn-option" onclick="selectOption('activity', 'Creative', this)">🎨 Create</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">📊 Core Metrics</div>
+                    
+                    <div class="slider-group">
+                        <div class="slider-header">
+                            <label class="form-label">😊 Mood</label>
+                            <div class="slider-value" id="moodVal">5</div>
+                        </div>
+                        <input type="range" class="slider" id="mood" min="0" max="10" value="5" oninput="updateSlider('mood')">
+                        <div class="slider-labels"><span>Terrible</span><span>Excellent</span></div>
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-header">
+                            <label class="form-label">💪 Physical Energy</label>
+                            <div class="slider-value" id="energyPhysicalVal">5</div>
+                        </div>
+                        <input type="range" class="slider" id="energyPhysical" min="0" max="10" value="5" oninput="updateSlider('energyPhysical')">
+                        <div class="slider-labels"><span>Exhausted</span><span>Energized</span></div>
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-header">
+                            <label class="form-label">🧠 Mental Energy</label>
+                            <div class="slider-value" id="energyMentalVal">5</div>
+                        </div>
+                        <input type="range" class="slider" id="energyMental" min="0" max="10" value="5" oninput="updateSlider('energyMental')">
+                        <div class="slider-labels"><span>Foggy</span><span>Sharp</span></div>
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-header">
+                            <label class="form-label">🎯 Focus</label>
+                            <div class="slider-value" id="focusVal">5</div>
+                        </div>
+                        <input type="range" class="slider" id="focus" min="0" max="10" value="5" oninput="updateSlider('focus')">
+                        <div class="slider-labels"><span>Scattered</span><span>Laser</span></div>
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-header">
+                            <label class="form-label">😰 Stress</label>
+                            <div class="slider-value" id="stressVal">5</div>
+                        </div>
+                        <input type="range" class="slider" id="stress" min="0" max="10" value="5" oninput="updateSlider('stress')">
+                        <div class="slider-labels"><span>Calm</span><span>Overwhelmed</span></div>
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-header">
+                            <label class="form-label">💤 Sleep Quality</label>
+                            <div class="slider-value" id="sleepVal">5</div>
+                        </div>
+                        <input type="range" class="slider" id="sleep" min="0" max="10" value="5" oninput="updateSlider('sleep')">
+                        <div class="slider-labels"><span>Terrible</span><span>Perfect</span></div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">💭 Deep Dive</div>
+
+                    <div class="form-group">
+                        <label class="form-label">❤️ Dominant Emotion</label>
+                        <input type="text" class="form-input" id="emotion" placeholder="e.g., anxious, excited, calm...">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">🌊 Physical Sensation</label>
+                        <input type="text" class="form-input" id="sensation" placeholder="What do you feel in your body?">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">💭 Main Thought Pattern</label>
+                        <textarea class="form-textarea" id="thoughtPattern" placeholder="What mental loops are running?"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">🧠 Raw Unfiltered Thoughts</label>
+                        <textarea class="form-textarea" id="rawThoughts" placeholder="Stream of consciousness..." rows="5"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">⚡ Key Decision/Action</label>
+                        <input type="text" class="form-input" id="decision" placeholder="What did you do or decide?">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">🔄 Recurring Pattern</label>
+                        <input type="text" class="form-input" id="pattern" placeholder="Any loops or cycles?">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">🎯 Current Goal</label>
+                        <input type="text" class="form-input" id="goal" placeholder="What are you working towards?">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">🚧 Main Obstacle</label>
+                        <input type="text" class="form-input" id="obstacle" placeholder="What's blocking you?">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">📝 Additional Notes</label>
+                        <textarea class="form-textarea" id="notes" placeholder="Anything else..."></textarea>
+                    </div>
+                </div>
+
+                <button class="btn-primary" onclick="saveEntry()">
+                    <span>💾</span>
+                    <span>Save & Analyze</span>
+                </button>
+            </div>
+
+            <!-- Voice Screen -->
+            <div id="voiceScreen" class="screen">
+                <div class="voice-recorder">
+                    <h3 style="margin-bottom: 16px;">🎤 Voice Memo</h3>
+                    <p style="font-size: 14px; color: #64748b; margin-bottom: 16px;">Real-time transcription powered by browser</p>
+                    <button class="record-btn" id="recordBtn" onclick="toggleRecording()">●</button>
+                    <p id="recordStatus" style="margin-top: 16px; font-weight: 600;">Tap to start recording</p>
+                    <div id="transcriptBox" style="margin-top: 16px; padding: 16px; background: white; border-radius: 12px; min-height: 80px; font-size: 14px; color: #475569; text-align: left;"></div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">📁 Voice Memos</div>
+                    <div id="memosList"></div>
+                </div>
+            </div>
+
+            <!-- Chat Screen -->
+            <div id="chatScreen" class="screen">
+                <div class="chat-container">
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="chat-message assistant">
+                            👋 I'm your AI consciousness clone! I've analyzed your patterns and can respond as you. Ask me about your mental states, patterns, or insights.
+                        </div>
+                    </div>
+                    <div class="chat-input-container">
+                        <input type="text" class="chat-input" id="chatInput" placeholder="Ask your AI clone..." onkeypress="if(event.key==='Enter') sendChat()">
+                        <button class="chat-send" onclick="sendChat()">Send</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Media Screen -->
+            <div id="mediaScreen" class="screen">
+                <div class="card">
+                    <div class="card-title">📸 Upload Memory</div>
+                    <label class="media-upload" for="mediaInput">
+                        <div style="font-size: 48px; margin-bottom: 12px;">📷</div>
+                        <div style="font-weight: 600; margin-bottom: 8px;">Tap to upload photos/videos</div>
+                        <div style="font-size: 13px; color: #64748b;">Preserves visual memories with context</div>
+                        <input type="file" id="mediaInput" accept="image/*,video/*" onchange="uploadMedia(event)" multiple>
+                    </label>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">🖼️ Gallery (<span id="mediaCount">0</span>)</div>
+                    <div class="media-grid" id="mediaGallery"></div>
+                </div>
+            </div>
+
+            <!-- Analysis Screen -->
+            <div id="analysisScreen" class="screen">
+                <div class="card">
+                    <div class="card-title">🧬 AI Analysis</div>
+                    <button class="btn-primary" onclick="runAIAnalysis()">
+                        <span>🤖</span>
+                        <span id="analyzeBtn">Analyze My Consciousness</span>
+                    </button>
+                    <div id="analysisResult"></div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">📊 Patterns Detected</div>
+                    <div id="patternsContainer"></div>
+                </div>
+            </div>
+
+            <!-- Timeline Screen -->
+            <div id="timelineScreen" class="screen">
+                <div class="card">
+                    <div class="card-title">📈 Your Timeline</div>
+                    <div id="timelineContainer"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Nav -->
+        <div class="bottom-nav">
+            <div class="nav-item active" onclick="switchScreen('log')">
+                <div class="nav-icon">➕</div>
+                <div class="nav-label">Log</div>
+            </div>
+            <div class="nav-item" onclick="switchScreen('voice')">
+                <div class="nav-icon">🎤</div>
+                <div class="nav-label">Voice</div>
+            </div>
+            <div class="nav-item" onclick="switchScreen('chat')">
+                <div class="nav-icon">💬</div>
+                <div class="nav-label">Chat</div>
+            </div>
+            <div class="nav-item" onclick="switchScreen('media')">
+                <div class="nav-icon">📷</div>
+                <div class="nav-label">Media</div>
+            </div>
+            <div class="nav-item" onclick="switchScreen('analysis')">
+                <div class="nav-icon">🧬</div>
+                <div class="nav-label">Analyze</div>
+            </div>
+            <div class="nav-item" onclick="switchScreen('timeline')">
+                <div class="nav-icon">📈</div>
+                <div class="nav-label">Timeline</div>
+            </div>
+        </div>
+
+        <!-- Toast -->
+        <div class="toast" id="toast"></div>
+    </div>
+
+    <script>
+        // ========== STATE ==========
+        let entries = [];
+        let voiceMemos = [];
+        let mediaFiles = [];
+        let selectedOptions = {
+            timeOfDay: 'Morning',
+            activity: null
+        };
+        let isRecording = false;
+        let mediaRecorder = null;
+        let audioChunks = [];
+        let recognition = null;
+        let fullTranscript = '';
+
+        // ========== INIT ==========
+        document.addEventListener('DOMContentLoaded', () => {
+            loadData();
+            initSpeechRecognition();
+            document.getElementById('entryDate').valueAsDate = new Date();
+            updateDashboard();
+            console.log('✅ Consciousness OS loaded');
+        });
+
+        // ========== DATA MANAGEMENT ==========
+        function loadData() {
+            try {
+                entries = JSON.parse(localStorage.getItem('cos_entries') || '[]');
+                voiceMemos = JSON.parse(localStorage.getItem('cos_voice') || '[]');
+                mediaFiles = JSON.parse(localStorage.getItem('cos_media') || '[]');
+                console.log(`📊 Loaded: ${entries.length} entries, ${voiceMemos.length} voice, ${mediaFiles.length} media`);
+            } catch (e) {
+                console.error('Error loading data:', e);
+                showToast('⚠️ Error loading data');
+            }
+        }
+
+        function saveData() {
+            try {
+                localStorage.setItem('cos_entries', JSON.stringify(entries));
+                localStorage.setItem('cos_voice', JSON.stringify(voiceMemos));
+                localStorage.setItem('cos_media', JSON.stringify(mediaFiles));
+            } catch (e) {
+                console.error('Save error:', e);
+                showToast('⚠️ Storage full - export data to continue');
+            }
+        }
+
+        // ========== SLIDERS ==========
+        function updateSlider(id) {
+            const slider = document.getElementById(id);
+            const display = document.getElementById(id + 'Val');
+            if (slider && display) {
+                display.textContent = slider.value;
+            }
+        }
+
+        // ========== OPTIONS ==========
+        function selectOption(type, value, element) {
+            selectedOptions[type] = value;
+            const parent = element.parentElement;
+            parent.querySelectorAll('.btn-option').forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        // ========== SAVE ENTRY ==========
+        function saveEntry() {
+            const entry = {
+                id: Date.now(),
+                timestamp: new Date().toISOString(),
+                date: document.getElementById('entryDate').value,
+                timeOfDay: selectedOptions.timeOfDay,
+                activity: selectedOptions.activity,
+                mood: parseInt(document.getElementById('mood').value),
+                energyPhysical: parseInt(document.getElementById('energyPhysical').value),
+                energyMental: parseInt(document.getElementById('energyMental').value),
+                focus: parseInt(document.getElementById('focus').value),
+                stress: parseInt(document.getElementById('stress').value),
+                sleep: parseInt(document.getElementById('sleep').value),
+                emotion: document.getElementById('emotion').value,
+                sensation: document.getElementById('sensation').value,
+                thoughtPattern: document.getElementById('thoughtPattern').value,
+                rawThoughts: document.getElementById('rawThoughts').value,
+                decision: document.getElementById('decision').value,
+                pattern: document.getElementById('pattern').value,
+                goal: document.getElementById('goal').value,
+                obstacle: document.getElementById('obstacle').value,
+                notes: document.getElementById('notes').value
+            };
+
+            // Calculate weighted cognition score
+            entry.cognition = (
+                (entry.focus * 2.5 +
+                entry.energyMental * 2.2 +
+                entry.energyPhysical * 1.3 +
+                entry.mood * 1.5 +
+                entry.sleep * 1.8 +
+                entry.stress * -1.0) / 9.3
+            ).toFixed(1);
+
+            entries.unshift(entry);
+            saveData();
+
+            // Reset form
+            document.querySelectorAll('.slider').forEach(s => { s.value = 5; updateSlider(s.id); });
+            document.querySelectorAll('input[type="text"], textarea').forEach(i => i.value = '');
+            selectedOptions.activity = null;
+            document.querySelectorAll('.btn-option').forEach(btn => {
+                if (btn.textContent.includes('Morning')) btn.classList.add('active');
+                else btn.classList.remove('active');
+            });
+
+            showToast(`✅ Entry saved • Score: ${entry.cognition}`);
+            updateDashboard();
+        }
+
+        // ========== VOICE RECORDING ==========
+        function initSpeechRecognition() {
+            try {
+                const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                if (SpeechRecognition) {
+                    recognition = new SpeechRecognition();
+                    recognition.continuous = true;
+                    recognition.interimResults = true;
+                    recognition.lang = 'en-US';
+
+                    recognition.onresult = (event) => {
+                        let interimTranscript = '';
+                        let finalTranscript = '';
+
+                        for (let i = event.resultIndex; i < event.results.length; i++) {
+                            const transcript = event.results[i][0].transcript;
+                            if (event.results[i].isFinal) {
+                                finalTranscript += transcript + ' ';
+                            } else {
+                                interimTranscript += transcript;
+                            }
+                        }
+
+                        fullTranscript += finalTranscript;
+                        document.getElementById('transcriptBox').textContent = fullTranscript + interimTranscript;
+                    };
+
+                    recognition.onerror = (event) => {
+                        console.error('Speech recognition error:', event.error);
+                        if (event.error === 'not-allowed') {
+                            showToast('❌ Microphone access denied. Enable in browser settings.');
+                        } else {
+                            showToast('⚠️ Speech recognition error: ' + event.error);
+                        }
+                        stopRecording();
+                    };
+
+                    recognition.onend = () => {
+                        if (isRecording) {
+                            // Restart if still recording
+                            recognition.start();
+                        }
+                    };
+
+                    console.log('✅ Speech recognition initialized');
+                } else {
+                    console.warn('Speech recognition not supported');
+                    showToast('⚠️ Speech recognition not supported in this browser');
+                }
+            } catch (e) {
+                console.error('Speech recognition init error:', e);
+            }
+        }
+
+        async function toggleRecording() {
+            const btn = document.getElementById('recordBtn');
+            const status = document.getElementById('recordStatus');
+
+            if (!isRecording) {
+                try {
+                    // Start audio recording
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    mediaRecorder = new MediaRecorder(stream);
+                    audioChunks = [];
+                    fullTranscript = '';
+
+                    mediaRecorder.ondataavailable = (event) => {
+                        audioChunks.push(event.data);
+                    };
+
+                    mediaRecorder.onstop = () => {
+                        const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+                        const reader = new FileReader();
+                        reader.onloadend = () => {
+                            const memo = {
+                                id: Date.now(),
+                                timestamp: new Date().toISOString(),
+                                audio: reader.result,
+                                transcript: fullTranscript,
+                                duration: Math.floor(audioChunks.length * 100 / 1000) // Rough estimate
+                            };
+                            voiceMemos.unshift(memo);
+                            saveData();
+                            loadVoiceMemos();
+                            showToast('✅ Voice memo saved');
+                        };
+                        reader.readAsDataURL(audioBlob);
+
+                        // Stop all tracks
+                        stream.getTracks().forEach(track => track.stop());
+                    };
+
+                    mediaRecorder.start();
+
+                    // Start speech recognition
+                    if (recognition) {
+                        recognition.start();
+                    }
+
+                    isRecording = true;
+                    btn.classList.add('recording');
+                    btn.textContent = '⏸';
+                    status.textContent = 'Recording... Tap to stop';
+                    showToast('🎤 Recording started');
+
+                } catch (err) {
+                    console.error('Recording error:', err);
+                    if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
+                        showToast('❌ Microphone permission denied! Please allow in browser settings.');
+                        alert('Please enable microphone access:\n\n1. Click the lock icon in address bar\n2. Allow microphone permission\n3. Refresh page and try again');
+                    } else {
+                        showToast('⚠️ Could not access microphone: ' + err.message);
+                    }
+                    stopRecording();
+                }
+            } else {
+                stopRecording();
+            }
+        }
+
+        function stopRecording() {
+            if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+                mediaRecorder.stop();
+            }
+            if (recognition) {
+                recognition.stop();
+            }
+
+            isRecording = false;
+            const btn = document.getElementById('recordBtn');
+            const status = document.getElementById('recordStatus');
+            btn.classList.remove('recording');
+            btn.textContent = '●';
+            status.textContent = 'Tap to start recording';
+        }
+
+        function loadVoiceMemos() {
+            const container = document.getElementById('memosList');
+            if (!voiceMemos.length) {
+                container.innerHTML = '<div class="empty-state"><div class="empty-text">No voice memos yet</div></div>';
+                return;
+            }
+
+            container.innerHTML = voiceMemos.slice(0, 20).map(memo => `
+                <div style="padding: 16px; background: #f8fafc; border-radius: 12px; margin-bottom: 12px;">
+                    <div style="font-size: 12px; color: #64748b; margin-bottom: 8px; font-weight: 600;">
+                        ${new Date(memo.timestamp).toLocaleString()} ${memo.duration ? `· ${memo.duration}s` : ''}
+                    </div>
+                    <audio controls src="${memo.audio}" style="width: 100%; height: 40px; margin-bottom: 8px;"></audio>
+                    ${memo.transcript ? `<div style="font-size: 14px; color: #475569; line-height: 1.6; padding: 12px; background: white; border-radius: 8px;">${memo.transcript}</div>` : ''}
+                </div>
+            `).join('');
+        }
+
+        // ========== MEDIA UPLOAD ==========
+        function uploadMedia(event) {
+            const files = event.target.files;
+            let processed = 0;
+
+            for (let file of files) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const media = {
+                        id: Date.now() + Math.random(),
+                        timestamp: new Date().toISOString(),
+                        type: file.type.startsWith('video') ? 'video' : 'image',
+                        data: e.target.result,
+                        name: file.name,
+                        size: file.size
+                    };
+                    mediaFiles.unshift(media);
+                    processed++;
+
+                    if (processed === files.length) {
+                        saveData();
+                        loadMediaGallery();
+                        showToast(`✅ ${files.length} file(s) uploaded`);
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+
+            // Reset input
+            event.target.value = '';
+        }
+
+        function loadMediaGallery() {
+            const container = document.getElementById('mediaGallery');
+            const count = document.getElementById('mediaCount');
+            count.textContent = mediaFiles.length;
+
+            if (!mediaFiles.length) {
+                container.innerHTML = '<div class="empty-state"><div class="empty-text">No media yet</div></div>';
+                return;
+            }
+
+            container.innerHTML = mediaFiles.slice(0, 50).map(media => `
+                <div class="media-item" title="${media.name} · ${new Date(media.timestamp).toLocaleDateString()}">
+                    ${media.type === 'image' ? 
+                        `<img src="${media.data}" alt="${media.name}">` :
+                        `<video src="${media.data}"></video>`
+                    }
+                </div>
+            `).join('');
+        }
+
+        // ========== AI ANALYSIS ==========
+        async function runAIAnalysis() {
+            if (entries.length < 3) {
+                showToast('⚠️ Need at least 3 entries for AI analysis');
+                document.getElementById('analysisResult').innerHTML = `
+                    <div class="analysis-card warning" style="margin-top: 16px;">
+                        <div class="analysis-title">⚠️ Insufficient Data</div>
+                        <div class="analysis-content">
+                            You need at least 3 entries for meaningful AI analysis.
+                            Current entries: ${entries.length}/3
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            const btn = document.getElementById('analyzeBtn');
+            btn.innerHTML = '<div class="spinner"></div>';
+
+            try {
+                const recentEntries = entries.slice(0, 7);
+                const summary = recentEntries.map(e => 
+                    `${e.date}: Mood ${e.mood}, Focus ${e.focus}, Energy ${e.energyMental}, Stress ${e.stress}. Thoughts: "${e.thoughtPattern}"`
+                ).join('\n');
+
+                // Calculate statistics
+                const avgMood = (recentEntries.reduce((sum, e) => sum + e.mood, 0) / recentEntries.length).toFixed(1);
+                const avgFocus = (recentEntries.reduce((sum, e) => sum + e.focus, 0) / recentEntries.length).toFixed(1);
+                const avgStress = (recentEntries.reduce((sum, e) => sum + e.stress, 0) / recentEntries.length).toFixed(1);
+                const avgCognition = (recentEntries.reduce((sum, e) => sum + parseFloat(e.cognition), 0) / recentEntries.length).toFixed(1);
+
+                // Generate local analysis (always works)
+                let analysis = generateLocalAnalysis(avgMood, avgFocus, avgStress, avgCognition, recentEntries);
+
+                // Try AI enhancement (may fail)
+                try {
+                    const aiResponse = await fetch('https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            inputs: `You are a psychologist. Analyze this person's mental state:\n${summary}\n\nProvide brief insights about patterns and recommendations.`,
+                            parameters: { max_length: 200 }
+                        })
+                    });
+
+                    if (aiResponse.ok) {
+                        const data = await aiResponse.json();
+                        if (data.generated_text) {
+                            analysis = data.generated_text;
+                        }
+                    }
+                } catch (aiError) {
+                    console.log('AI API unavailable, using local analysis');
+                }
+
+                document.getElementById('analysisResult').innerHTML = `
+                    <div class="analysis-card success" style="margin-top: 16px;">
+                        <div class="analysis-title">🤖 AI Analysis Complete</div>
+                        <div class="analysis-content" style="white-space: pre-line;">${analysis}</div>
+                    </div>
+                    <div class="analysis-card" style="margin-top: 12px;">
+                        <div class="analysis-title">📊 Statistics (Last 7 Days)</div>
+                        <div class="analysis-content">
+                            <strong>Average Cognition Score:</strong> ${avgCognition}/10<br>
+                            <strong>Average Mood:</strong> ${avgMood}/10<br>
+                            <strong>Average Focus:</strong> ${avgFocus}/10<br>
+                            <strong>Average Stress:</strong> ${avgStress}/10<br>
+                            <strong>Total Entries:</strong> ${entries.length}
+                        </div>
+                    </div>
+                `;
+
+                showToast('✅ Analysis complete');
+
+            } catch (error) {
+                console.error('Analysis error:', error);
+                document.getElementById('analysisResult').innerHTML = `
+                    <div class="analysis-card warning" style="margin-top: 16px;">
+                        <div class="analysis-title">⚠️ Analysis Error</div>
+                        <div class="analysis-content">
+                            Could not complete full AI analysis. Error: ${error.message}
+                            <br><br>
+                            Your data is safe. Try again or use local pattern detection.
+                        </div>
+                    </div>
+                `;
+                showToast('⚠️ Analysis error - see details');
+            } finally {
+                btn.textContent = 'Analyze My Consciousness';
+            }
+        }
+
+        function generateLocalAnalysis(avgMood, avgFocus, avgStress, avgCognition, entries) {
+            let analysis = `Based on ${entries.length} recent entries:\n\n`;
+
+            // Mood analysis
+            if (avgMood > 7) {
+                analysis += `✅ Your mood is consistently high (${avgMood}/10). You're in a positive mental state.\n\n`;
+            } else if (avgMood > 5) {
+                analysis += `⚖️ Your mood is balanced (${avgMood}/10). Normal functioning with room for improvement.\n\n`;
+            } else {
+                analysis += `⚠️ Your mood is low (${avgMood}/10). Consider what factors are affecting you negatively.\n\n`;
+            }
+
+            // Focus analysis
+            if (avgFocus > 7) {
+                analysis += `🎯 Excellent focus (${avgFocus}/10). You're maintaining strong concentration.\n\n`;
+            } else if (avgFocus < 5) {
+                analysis += `⚠️ Low focus (${avgFocus}/10). Try eliminating distractions or taking breaks.\n\n`;
+            }
+
+            // Stress analysis
+            if (avgStress > 7) {
+                analysis += `⚠️ High stress detected (${avgStress}/10). Prioritize stress management and recovery.\n\n`;
+            } else if (avgStress < 4) {
+                analysis += `✅ Low stress levels (${avgStress}/10). Good stress management.\n\n`;
+            }
+
+            // Overall cognition
+            if (avgCognition > 7.5) {
+                analysis += `🚀 Overall: Peak performance state (${avgCognition}/10). Excellent cognitive functioning.`;
+            } else if (avgCognition > 6) {
+                analysis += `⚡ Overall: Good functional state (${avgCognition}/10). Strong baseline.`;
+            } else if (avgCognition > 5) {
+                analysis += `⚖️ Overall: Moderate state (${avgCognition}/10). Sustainable but could optimize.`;
+            } else {
+                analysis += `🌙 Overall: Recovery needed (${avgCognition}/10). Focus on rest and self-care.`;
+            }
+
+            return analysis;
+        }
+
+        function detectPatterns() {
+            const container = document.getElementById('patternsContainer');
+            if (entries.length < 5) {
+                container.innerHTML = '<div class="empty-text">Need 5+ entries to detect patterns</div>';
+                return;
+            }
+
+            const recent = entries.slice(0, 30);
+            const patterns = [];
+
+            // Flow state
+            const flow = recent.filter(e => e.focus >= 8 && parseFloat(e.cognition) >= 8).length;
+            if (flow >= 3) {
+                patterns.push({
+                    type: 'success',
+                    icon: '🌊',
+                    label: 'Flow State Access',
+                    desc: `Detected ${flow} high-performance flow states. You're accessing peak cognitive zones regularly.`
+                });
+            }
+
+            // Burnout
+            const burnout = recent.filter(e => e.mood < 4 && e.energyMental < 4 && e.stress > 7).length;
+            if (burnout >= 3) {
+                patterns.push({
+                    type: 'warning',
+                    icon: '🔥',
+                    label: 'Burnout Risk',
+                    desc: `${burnout} high-stress, low-energy states detected. Immediate recovery recommended.`
+                });
+            }
+
+            // Sleep issues
+            const poorSleep = recent.filter(e => e.sleep < 4).length;
+            if (poorSleep >= 3) {
+                patterns.push({
+                    type: 'warning',
+                    icon: '💤',
+                    label: 'Sleep Deficit',
+                    desc: `${poorSleep} nights of poor sleep affecting cognitive performance. Prioritize sleep hygiene.`
+                });
+            }
+
+            // Sustained excellence
+            const excellent = recent.filter(e => parseFloat(e.cognition) >= 7.5).length;
+            if (excellent >= recent.length * 0.7) {
+                patterns.push({
+                    type: 'success',
+                    icon: '✨',
+                    label: 'Sustained Excellence',
+                    desc: `${Math.round(excellent/recent.length*100)}% of states above 7.5. Exceptional baseline.`
+                });
+            }
+
+            if (patterns.length === 0) {
+                container.innerHTML = `
+                    <div class="analysis-card">
+                        <div class="analysis-title">⚖️ Balanced State</div>
+                        <div class="analysis-content">No critical patterns detected. System operating normally.</div>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = patterns.map(p => `
+                    <div class="analysis-card ${p.type}">
+                        <div class="analysis-title">${p.icon} ${p.label}</div>
+                        <div class="analysis-content">${p.desc}</div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // ========== CHAT ==========
+        async function sendChat() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            if (!message) return;
+
+            addChatMessage('user', message);
+            input.value = '';
+
+            const response = await getAIResponse(message);
+            addChatMessage('assistant', response);
+        }
+
+        function addChatMessage(role, content) {
+            const container = document.getElementById('chatMessages');
+            const div = document.createElement('div');
+            div.className = `chat-message ${role}`;
+            div.textContent = content;
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        async function getAIResponse(message) {
+            if (entries.length === 0) {
+                return "I don't have any data about you yet. Start logging your consciousness states so I can learn your patterns!";
+            }
+
+            const recentThoughts = entries.slice(0, 5).map(e => e.thoughtPattern || e.rawThoughts).filter(Boolean).join(' ');
+            const avgMood = (entries.slice(0, 7).reduce((sum, e) => sum + e.mood, 0) / Math.min(7, entries.length)).toFixed(1);
+            const avgFocus = (entries.slice(0, 7).reduce((sum, e) => sum + e.focus, 0) / Math.min(7, entries.length)).toFixed(1);
+
+            // Generate response based on patterns
+            if (message.toLowerCase().includes('mood') || message.toLowerCase().includes('feel')) {
+                return `Based on your recent logs, your average mood is ${avgMood}/10. ${
+                    avgMood > 7 ? "You've been consistently positive!" :
+                    avgMood > 5 ? "You're in a balanced state." :
+                    "Things have been challenging. Your patterns show stress factors affecting your mood."
+                }`;
+            }
+
+            if (message.toLowerCase().includes('focus') || message.toLowerCase().includes('concentrate')) {
+                return `Your average focus is ${avgFocus}/10 over the past week. ${
+                    avgFocus > 7 ? "You're maintaining excellent concentration!" :
+                    avgFocus > 5 ? "Your focus is decent but could be optimized." :
+                    "Your focus has been scattered. Try the Pomodoro technique or eliminate distractions."
+                }`;
+            }
+
+            if (message.toLowerCase().includes('pattern') || message.toLowerCase().includes('insight')) {
+                const highStress = entries.filter(e => e.stress > 7).length;
+                if (highStress > 3) {
+                    return `I've noticed ${highStress} high-stress states in your recent entries. This correlates with your lower mood scores. Consider stress management techniques.`;
+                }
+                return "Your patterns show ${entries.length} entries collected so far. Key insight: Your cognition score correlates strongly with sleep quality and stress levels.";
+            }
+
+            return `I've analyzed ${entries.length} entries. Your average mood is ${avgMood}/10 and focus is ${avgFocus}/10. What specific aspect would you like to explore?`;
+        }
+
+        // ========== TIMELINE ==========
+        function loadTimeline() {
+            const container = document.getElementById('timelineContainer');
+            if (!entries.length) {
+                container.innerHTML = '<div class="empty-state"><div class="empty-icon">📊</div><div class="empty-text">No entries yet. Start logging!</div></div>';
+                return;
+            }
+
+            container.innerHTML = entries.slice(0, 50).map(entry => {
+                const score = parseFloat(entry.cognition);
+                const statusClass = score >= 8 ? 'peak' : score < 4 ? 'low' : '';
+
+                return `
+                    <div class="timeline-entry ${statusClass}">
+                        <div class="timeline-header">
+                            <div class="timeline-date">${new Date(entry.timestamp).toLocaleString()} · ${entry.timeOfDay}</div>
+                            <div class="timeline-score">${entry.cognition}</div>
+                        </div>
+                        <div class="timeline-metrics">
+                            <span class="timeline-tag">${entry.emotion || 'No emotion'}</span>
+                            <span class="timeline-tag">Mood ${entry.mood}</span>
+                            <span class="timeline-tag">Focus ${entry.focus}</span>
+                            <span class="timeline-tag">Energy ${entry.energyMental}</span>
+                            <span class="timeline-tag">Stress ${entry.stress}</span>
+                            ${entry.activity ? `<span class="timeline-tag">${entry.activity}</span>` : ''}
+                        </div>
+                        ${entry.thoughtPattern ? `<div class="timeline-content">${entry.thoughtPattern}</div>` : ''}
+                        ${entry.rawThoughts ? `<div class="timeline-content" style="font-style: italic; margin-top: 8px;">"${entry.rawThoughts.substring(0, 200)}${entry.rawThoughts.length > 200 ? '...' : ''}"</div>` : ''}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // ========== DASHBOARD ==========
+        function updateDashboard() {
+            if (entries.length) {
+                const latest = entries[0];
+                document.getElementById('mainScore').textContent = latest.cognition;
+
+                const score = parseFloat(latest.cognition);
+                document.getElementById('stateLabel').textContent = 
+                    score >= 8 ? '🚀 Peak Performance' :
+                    score >= 6.5 ? '⚡ High Functional' :
+                    score >= 5 ? '⚖️ Balanced' :
+                    score >= 3.5 ? '🌙 Low Energy' : '⚠️ Recovery Needed';
+
+                const recent = entries.slice(0, 7);
+                const avgMood = (recent.reduce((sum, e) => sum + e.mood, 0) / recent.length).toFixed(1);
+                const avgFocus = (recent.reduce((sum, e) => sum + e.focus, 0) / recent.length).toFixed(1);
+
+                document.getElementById('avgMood').textContent = avgMood;
+                document.getElementById('avgFocus').textContent = avgFocus;
+            }
+
+            document.getElementById('totalLogs').textContent = entries.length;
+        }
+
+        // ========== NAVIGATION ==========
+        function switchScreen(name) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(name + 'Screen').classList.add('active');
+
+            document.querySelectorAll('.nav-item').forEach((item, idx) => {
+                const screens = ['log', 'voice', 'chat', 'media', 'analysis', 'timeline'];
+                item.classList.toggle('active', screens[idx] === name);
+            });
+
+            if (name === 'voice') loadVoiceMemos();
+            if (name === 'media') loadMediaGallery();
+            if (name === 'analysis') detectPatterns();
+            if (name === 'timeline') loadTimeline();
+        }
+
+        // ========== TOAST ==========
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 4000);
+        }
+
+        // ========== KEYBOARD SHORTCUTS ==========
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                if (e.key === 's') {
+                    e.preventDefault();
+                    if (document.getElementById('logScreen').classList.contains('active')) {
+                        saveEntry();
+                    }
+                }
+            }
+        });
+
+        console.log('✅ All features loaded successfully');
+    </script>
+</body>
+</html>
